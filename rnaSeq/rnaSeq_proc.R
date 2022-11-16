@@ -26,7 +26,7 @@ for(id in unique(meta.rseq$RNA)){
 
 #Flatten list to a data frame with all samples
 rseq.df <- ldply(rseq, data.frame)
-rseq.df2 <- reshape2::dcast(rseq.df,  GeneName + EnsemblGene ~ sample, value.var = "log2TPM", fun.aggregate = sum) %>% 
+rseq.df2 <- reshape2::dcast(rseq.df,  GeneName + EnsemblGene ~ sample, value.var = "log2TPM") %>% 
   filter(rowMeans(.[,-c(1,2)]) >= 2) 
 row.names(rseq.df2) <- make.names(rseq.df2$GeneName, unique = T)
 rseq.df2 <- rseq.df2[,-c(1,2)]
